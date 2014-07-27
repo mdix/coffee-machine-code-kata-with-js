@@ -3,7 +3,15 @@ var mdix = mdix || {};
 mdix.BeanReservoire = function(beanReservoireConfig) {
     var fillingLevel = 0;
 
-    //TODO: remove x beans depending on what coffee (strong, normal, mild)
+    this.getUnits = function(units) {
+        if (units > fillingLevel) {
+            throw new Error('not enough beans');
+        }
+
+        fillingLevel -= units;
+
+        return this;
+    };
 
     this.currentFillingLevel = function() {
         return fillingLevel;
@@ -11,6 +19,7 @@ mdix.BeanReservoire = function(beanReservoireConfig) {
 
     this.refill = function() {
         fillingLevel = beanReservoireConfig.capacity;
+
         return this;
     };
 };
