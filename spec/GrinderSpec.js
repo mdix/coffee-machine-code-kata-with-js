@@ -57,4 +57,12 @@ describe('the grinder module', function() {
             done();
         }, grinderConfigSpec.coarsenessDurations.mild);
     });
+
+    it('should throw an exception if coarseness does not exist', function() {
+        expect(function() { grinder.grind('tee', callbackSpy) }).toThrow(new Error('unknown coarseness'));
+    });
+
+    it('should throw an exception if no callback given', function() {
+        expect(function() { grinder.grind('tee', null) }).toThrow(new Error('missing callback'));
+    });
 });

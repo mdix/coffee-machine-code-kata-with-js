@@ -1,23 +1,16 @@
 var Grinder = function(grinderConfig) {
     function grind(coarseness, callback) {
-
-        if (coarseness === 'strong') {
-            window.setTimeout(function() {
-                callback();
-            }, grinderConfig.coarsenessDurations.strong);
+        if (typeof callback !== 'function') {
+            throw new Error('missing callback');
         }
 
-        if (coarseness === 'normal') {
-            window.setTimeout(function() {
-                callback();
-            }, grinderConfig.coarsenessDurations.normal);
+        if (!grinderConfig.coarsenessDurations.hasOwnProperty(coarseness)) {
+            throw new Error('unknown coarseness');
         }
 
-        if (coarseness === 'mild') {
-            window.setTimeout(function() {
-                callback();
-            }, grinderConfig.coarsenessDurations.mild);
-        }
+        window.setTimeout(function() {
+            callback();
+        }, grinderConfig.coarsenessDurations[coarseness]);
     }
 
     this.grind = function(coarseness, callback) {
