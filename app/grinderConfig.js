@@ -1,4 +1,6 @@
-var grinderConfig = {
+var ns = ns || {};
+
+ns.grinderConfig = {
     'coarsenessDurations': {
         'strong': 7000,
         'normal': 5000,

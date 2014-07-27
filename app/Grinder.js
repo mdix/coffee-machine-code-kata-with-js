@@ -1,4 +1,6 @@
-var Grinder = function(grinderConfig) {
+var ns = ns || {};
+
+ns.Grinder = function(grinderConfig) {
     var coarseness,
         callback;
 

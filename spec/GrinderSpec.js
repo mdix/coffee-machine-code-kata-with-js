@@ -3,7 +3,7 @@ describe('the grinder module', function() {
         callbackSpy;
 
     beforeEach(function() {
-        grinder = new Grinder(grinderConfigSpec);
+        grinder = new ns.Grinder(ns.grinderConfigSpec);
         callbackSpy = jasmine.createSpy('callback');
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
     });
@@ -22,12 +22,12 @@ describe('the grinder module', function() {
 
         setTimeout(function() {
             expect(callbackSpy).not.toHaveBeenCalled();
-        }, grinderConfigSpec.coarsenessDurations.strong - 1);
+        }, ns.grinderConfigSpec.coarsenessDurations.strong - 1);
 
         setTimeout(function() {
             expect(callbackSpy).toHaveBeenCalled();
             done();
-        }, grinderConfigSpec.coarsenessDurations.strong);
+        }, ns.grinderConfigSpec.coarsenessDurations.strong);
     });
 
     it('should call the callback after a timeout that is defined via grinderConfig.coarsenessDurations.normal'
@@ -36,12 +36,12 @@ describe('the grinder module', function() {
 
         setTimeout(function() {
             expect(callbackSpy).not.toHaveBeenCalled();
-        }, grinderConfigSpec.coarsenessDurations.normal - 1);
+        }, ns.grinderConfigSpec.coarsenessDurations.normal - 1);
 
         setTimeout(function() {
             expect(callbackSpy).toHaveBeenCalled();
             done();
-        }, grinderConfigSpec.coarsenessDurations.normal);
+        }, ns.grinderConfigSpec.coarsenessDurations.normal);
     });
 
     it('should call the callback after a timeout that is defined via grinderConfig.coarsenessDurations.mild'
@@ -50,12 +50,12 @@ describe('the grinder module', function() {
 
         setTimeout(function() {
             expect(callbackSpy).not.toHaveBeenCalled();
-        }, grinderConfigSpec.coarsenessDurations.mild - 1);
+        }, ns.grinderConfigSpec.coarsenessDurations.mild - 1);
 
         setTimeout(function() {
             expect(callbackSpy).toHaveBeenCalled();
             done();
-        }, grinderConfigSpec.coarsenessDurations.mild);
+        }, ns.grinderConfigSpec.coarsenessDurations.mild);
     });
 
     it('should throw an exception if coarseness does not exist', function() {
