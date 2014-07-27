@@ -1,6 +1,6 @@
-var ns = ns || {};
+var mdix = mdix || {};
 
-ns.Grinder = function(grinderConfig) {
+mdix.Grinder = function(grinderConfig) {
     var coarseness,
         callback;
 

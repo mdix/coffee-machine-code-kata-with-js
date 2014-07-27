@@ -1,6 +1,6 @@
-var ns = ns || {};
+var mdix = mdix || {};
 
-ns.grinderConfig = {
+mdix.grinderConfig = {
     'coarsenessDurations': {
         'strong': 7000,
         'normal': 5000,
