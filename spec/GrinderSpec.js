@@ -3,7 +3,7 @@ describe('the grinder module', function() {
         callbackSpy;
 
     beforeEach(function() {
-        grinder = new Grinder();
+        grinder = new Grinder(grinderConfigSpec);
         callbackSpy = jasmine.createSpy('callback');
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
     });
@@ -16,42 +16,45 @@ describe('the grinder module', function() {
         expect(typeof grinder.grind).toBe('function');
     });
 
-    it('should call the callback after 7 seconds if strong coffee is requested', function(done) {
+    it('should call the callback after a timeout that is defined via grinderConfig.coarsenessDurations.strong'
+        + ' if strong coffee is requested', function(done) {
         grinder.grind('strong', callbackSpy);
 
         setTimeout(function() {
             expect(callbackSpy).not.toHaveBeenCalled();
-        }, 6999);
+        }, grinderConfigSpec.coarsenessDurations.strong - 1);
 
         setTimeout(function() {
             expect(callbackSpy).toHaveBeenCalled();
             done();
-        }, 7000);
+        }, grinderConfigSpec.coarsenessDurations.strong);
     });
 
-    it('should call the callback after 5 seconds if normal coffee is requested', function(done) {
+    it('should call the callback after a timeout that is defined via grinderConfig.coarsenessDurations.normal'
+        + ' if normal coffee is requested', function(done) {
         grinder.grind('normal', callbackSpy);
 
         setTimeout(function() {
             expect(callbackSpy).not.toHaveBeenCalled();
-        }, 4999);
+        }, grinderConfigSpec.coarsenessDurations.normal - 1);
 
         setTimeout(function() {
             expect(callbackSpy).toHaveBeenCalled();
             done();
-        }, 5000);
+        }, grinderConfigSpec.coarsenessDurations.normal);
     });
 
-    it('should call the callback after 3 seconds if mild coffee is requested', function(done) {
+    it('should call the callback after a timeout that is defined via grinderConfig.coarsenessDurations.mild'
+        + ' if mild coffee is requested', function(done) {
         grinder.grind('mild', callbackSpy);
 
         setTimeout(function() {
             expect(callbackSpy).not.toHaveBeenCalled();
-        }, 2999);
+        }, grinderConfigSpec.coarsenessDurations.mild - 1);
 
         setTimeout(function() {
             expect(callbackSpy).toHaveBeenCalled();
             done();
-        }, 3000);
+        }, grinderConfigSpec.coarsenessDurations.mild);
     });
 });

@@ -1,22 +1,22 @@
-var Grinder = function() {
-
+var Grinder = function(grinderConfig) {
     function grind(coarseness, callback) {
+
         if (coarseness === 'strong') {
             window.setTimeout(function() {
                 callback();
-            }, 7000);
+            }, grinderConfig.coarsenessDurations.strong);
         }
 
         if (coarseness === 'normal') {
             window.setTimeout(function() {
                 callback();
-            }, 5000);
+            }, grinderConfig.coarsenessDurations.normal);
         }
 
         if (coarseness === 'mild') {
             window.setTimeout(function() {
                 callback();
-            }, 3000);
+            }, grinderConfig.coarsenessDurations.mild);
         }
     }
 
