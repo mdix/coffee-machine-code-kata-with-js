@@ -1,19 +1,29 @@
 var Grinder = function(grinderConfig) {
-    function grind(coarseness, callback) {
-        if (typeof callback !== 'function') {
-            throw new Error('missing callback');
-        }
+    var coarseness,
+        callback;
 
-        if (!grinderConfig.coarsenessDurations.hasOwnProperty(coarseness)) {
-            throw new Error('unknown coarseness');
-        }
+    function grind() {
+        if (noCallbackGiven()) { throw new Error('missing callback'); }
+        if (unknownCoarseness()) { throw new Error('unknown coarseness'); }
 
-        window.setTimeout(function() {
+        setTimeout(function() {
             callback();
         }, grinderConfig.coarsenessDurations[coarseness]);
     }
 
-    this.grind = function(coarseness, callback) {
-        grind(coarseness, callback);
+    function noCallbackGiven() {
+        return typeof callback !== 'function'
+    }
+
+    function unknownCoarseness() {
+        return !grinderConfig.coarsenessDurations.hasOwnProperty(coarseness)
+    }
+
+
+    this.grind = function(_coarseness, _callback) {
+        coarseness = _coarseness;
+        callback = _callback;
+
+        grind();
     };
 };
