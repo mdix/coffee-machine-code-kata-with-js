@@ -1,6 +1,6 @@
 var mdix = mdix || {};
 
-mdix.BeanReservoire = function(beanReservoireConfig) {
+mdix.BeanReservoire = function(beanReservoireConfig, mediator) {
     var fillingLevel = 0;
 
     this.getUnits = function(units) {
@@ -19,6 +19,7 @@ mdix.BeanReservoire = function(beanReservoireConfig) {
 
     this.refill = function() {
         fillingLevel = beanReservoireConfig.capacity;
+        mediator.mediatorjs.publish('BeanReservoire:refilled');
 
         return this;
     };

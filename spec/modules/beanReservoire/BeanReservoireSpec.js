@@ -1,8 +1,14 @@
 describe('the bean reservoire module', function() {
-    var reservoire;
+    var mediator,
+        config,
+        reservoire,
+        callbackSpy;
 
     beforeEach(function() {
-        reservoire = new mdix.BeanReservoire(mdix.beanReservoireConfigSpec);
+        mediator    = new mdix.Mediator();
+        config      = mdix.beanReservoireConfigSpec;
+        reservoire  = new mdix.BeanReservoire(config, mediator);
+        callbackSpy = jasmine.createSpy('callback');
     });
 
     it('should exist', function() {
@@ -15,6 +21,12 @@ describe('the bean reservoire module', function() {
 
     it('should refill to beanReservoireConfig.capacity when refill is called', function() {
         expect(reservoire.refill().currentFillingLevel()).toBe(mdix.beanReservoireConfigSpec.capacity);
+    });
+
+    it('should emit BeanReservoire:refilled on refill', function() {
+        mediator.mediatorjs.subscribe('BeanReservoire:refilled', callbackSpy);
+        reservoire.refill();
+        expect(callbackSpy).toHaveBeenCalled();
     });
 
     it('should throw an error if insufficient beans for next operation', function() {
