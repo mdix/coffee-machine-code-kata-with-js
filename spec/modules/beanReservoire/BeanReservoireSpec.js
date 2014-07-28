@@ -24,7 +24,7 @@ describe('the bean reservoire module', function() {
     });
 
     it('should emit BeanReservoire:refilled on refill', function() {
-        mediator.mediatorjs.subscribe('BeanReservoire:refilled', callbackSpy);
+        mediator.subscribe('BeanReservoire:refilled', callbackSpy);
         reservoire.refill();
         expect(callbackSpy).toHaveBeenCalled();
     });

@@ -6,9 +6,7 @@ mdix.Mediator = function() {
     if (instance) {
         return instance;
     }
-    arguments.callee._singletonInstance = this;
-
-    this.mediatorjs = new Mediator();
+    arguments.callee._singletonInstance = new Mediator();
 
     return this;
 };

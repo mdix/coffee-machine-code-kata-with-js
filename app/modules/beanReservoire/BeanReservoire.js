@@ -19,7 +19,7 @@ mdix.BeanReservoire = function(beanReservoireConfig, mediator) {
 
     this.refill = function() {
         fillingLevel = beanReservoireConfig.capacity;
-        mediator.mediatorjs.publish('BeanReservoire:refilled');
+        mediator.publish('BeanReservoire:refilled');
 
         return this;
     };
