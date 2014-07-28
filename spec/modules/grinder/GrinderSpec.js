@@ -30,7 +30,7 @@ describe('the grinder module', function() {
         }, mdix.grinderConfigSpec.coarsenessDurations.strong);
     });
 
-    it('should call the callback after a timeout that is defined via grinderConfig.coarsenessDuratiomdix.normal'
+    it('should call the callback after a timeout that is defined via grinderConfig.coarsenessDurations.normal'
         + ' if normal coffee is requested', function(done) {
         grinder.grind('normal', callbackSpy);
 
