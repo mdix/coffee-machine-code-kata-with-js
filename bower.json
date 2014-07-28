@@ -12,6 +12,7 @@
     "bower_components",
     "spec"
   ],
-  "devDependencies": {
+  "dependencies": {
+    "mediator-js": "~0.9.7"
   }
 }
