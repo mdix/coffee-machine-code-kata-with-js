@@ -12,4 +12,12 @@ describe('a mediator', function() {
     it('should be a singleton', function() {
         expect(mediator).toEqual(new mdix.Mediator());
     });
+
+    it('should have a mediatorjs property', function() {
+        expect(mediator.mediatorjs).toBeTruthy();
+    });
+
+    it('mediatorjs property should be an instance of mediator.js (global var: Mediator)', function() {
+        expect(mediator.mediatorjs instanceof Mediator).toBeTruthy();
+    });
 });
