@@ -1,5 +1,6 @@
 var mdix = mdix || {};
 
+//TODO: Remove duplication (almost the same as mdix.beanReservoire)
 mdix.waterReservoire = function(waterReservoireConfig, mediator) {
     var fillingLevel = 0;
 
@@ -20,5 +21,7 @@ mdix.waterReservoire = function(waterReservoireConfig, mediator) {
     this.refill = function() {
         fillingLevel = waterReservoireConfig.capacity;
         mediator.publish('WaterReservoire:refilled');
-    }
+
+        return this;
+    };
 };

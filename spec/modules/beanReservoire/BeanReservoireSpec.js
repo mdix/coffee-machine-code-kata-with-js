@@ -48,4 +48,14 @@ describe('the bean reservoire module', function() {
         expect(reservoire.getUnits(11).currentFillingLevel())
             .toBe(mdix.beanReservoireConfigSpec.capacity - 20 - 11);
     });
+
+    describe('should be chainable:', function() {
+        it('getUnits()', function() {
+            expect(reservoire.getUnits(0)).toBe(reservoire);
+        });
+
+        it('refill()', function() {
+            expect(reservoire.refill()).toBe(reservoire);
+        });
+    });
 });
