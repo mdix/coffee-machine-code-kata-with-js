@@ -1,8 +1,14 @@
 describe('the heater module', function() {
-    var heater;
+    var mediator,
+        config,
+        heater,
+        callbackSpy;
 
     beforeEach(function() {
-        heater = new mdix.Heater();
+        mediator = new mdix.Mediator();
+        config = mdix.heaterConfigSpec;
+        heater = new mdix.Heater(config, mediator);
+        callbackSpy = jasmine.createSpy('callback');
     });
 
     it('exists', function() {
@@ -13,7 +19,24 @@ describe('the heater module', function() {
 
     it('should bail out if water reservoire can not deliver (water reservoire should do the error reporting)');
 
-    it('should emit a Heater:heating when heating starts')
+    it('should emit a Heater:heating when heating starts', function() {
+        mediator.subscribe('Heater:heating', callbackSpy);
+        heater.heat();
+        expect(callbackSpy).toHaveBeenCalled();
+    });
 
-    it('should take 20 seconds to heat and finish with emitting Heater:imFuckingHot');
+    it('should take mdix.heaterConfigSpec.duration to heat ' +
+       'and finish with emitting Heater:imFuckingHot', function(done) {
+        mediator.subscribe('Heater:imFuckingHot', callbackSpy);
+        heater.heat();
+
+        setTimeout(function() {
+            expect(callbackSpy).not.toHaveBeenCalled();
+        }, config.duration - 1);
+
+        setTimeout(function() {
+            expect(callbackSpy).toHaveBeenCalled();
+            done();
+        }, config.duration);
+    });
 });
