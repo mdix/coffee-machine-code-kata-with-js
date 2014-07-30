@@ -15,13 +15,31 @@ describe('the heater module', function() {
         expect(typeof heater).toBe('object');
     });
 
-    it('should be able to request water from the water reservoire');
+    describe('should be able to request water from the water reservoire', function() {
+        it('by emitting needWater', function() {
+            mediator.subscribe('needWater', callbackSpy);
+            heater.heat();
+            expect(callbackSpy).toHaveBeenCalled();
+        });
 
-    it('should bail out if water reservoire can not deliver (water reservoire should do the error reporting)');
+        it('with the units as data', function() {
+            mediator.subscribe('needWater', callbackSpy);
+            heater.heat();
+            expect(callbackSpy.calls.mostRecent().args[0].units).toBe(config.amount);
+        });
+    });
 
-    it('should emit a Heater:heating when heating starts', function() {
+    it('should not start heating if there is not enough water', function() {
         mediator.subscribe('Heater:heating', callbackSpy);
         heater.heat();
+        // no 'hereWater' emitted
+        expect(callbackSpy).not.toHaveBeenCalled();
+    });
+
+    it('should emit a Heater:heating when heating starts (and there is enough water)', function() {
+        mediator.subscribe('Heater:heating', callbackSpy);
+        heater.heat();
+        mediator.publish('hereWater');
         expect(callbackSpy).toHaveBeenCalled();
     });
 

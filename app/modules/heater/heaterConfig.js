@@ -1,5 +1,6 @@
 var mdix = mdix || {};
 
-mdix.heaterConfigSpec = {
+mdix.heaterConfig = {
+    'amount': 300,
     'duration': 20000
 };
