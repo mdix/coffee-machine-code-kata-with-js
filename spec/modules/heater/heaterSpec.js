@@ -16,14 +16,14 @@ describe('the heater module', function() {
     });
 
     describe('should be able to request water from the water reservoire', function() {
-        it('by emitting needWater', function() {
-            mediator.subscribe('needWater', callbackSpy);
+        it('by emitting requestWater', function() {
+            mediator.subscribe('requestWater', callbackSpy);
             heater.heat();
             expect(callbackSpy).toHaveBeenCalled();
         });
 
         it('with the units as data', function() {
-            mediator.subscribe('needWater', callbackSpy);
+            mediator.subscribe('requestWater', callbackSpy);
             heater.heat();
             expect(callbackSpy.calls.mostRecent().args[0].units).toBe(config.amount);
         });
@@ -32,14 +32,14 @@ describe('the heater module', function() {
     it('should not start heating if there is not enough water', function() {
         mediator.subscribe('Heater:heating', callbackSpy);
         heater.heat();
-        // no 'hereWater' emitted
+        // no 'provideWater' emitted
         expect(callbackSpy).not.toHaveBeenCalled();
     });
 
     it('should emit a Heater:heating when heating starts (and there is enough water)', function() {
         mediator.subscribe('Heater:heating', callbackSpy);
         heater.heat();
-        mediator.publish('hereWater');
+        mediator.publish('provideWater');
         expect(callbackSpy).toHaveBeenCalled();
     });
 

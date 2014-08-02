@@ -2,8 +2,8 @@ var mdix = mdix || {};
 
 mdix.Heater = function(heaterConfig, mediator) {
     var getWater = function() {
-        mediator.subscribe('hereWater', heat);
-        mediator.publish('needWater', {units: heaterConfig.amount});
+        mediator.subscribe('provideWater', heat);
+        mediator.publish('requestWater', {units: heaterConfig.amount});
     };
 
     var heat = function() {
