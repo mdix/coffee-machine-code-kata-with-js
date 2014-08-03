@@ -34,7 +34,7 @@ describe('the water reservoire module', function() {
     it('should throw an error if insufficient water for next operation', function() {
         reservoire.refill();
         expect(function() { reservoire.getUnits(mdix.waterReservoireConfigSpec.capacity * 2) })
-            .toThrow(new Error('not enough beans'));
+            .toThrow(new Error('not enough water'));
     });
 
     it('should not throw an error if sufficient water for next operation', function() {
@@ -49,6 +49,22 @@ describe('the water reservoire module', function() {
             .toBe(mdix.waterReservoireConfigSpec.capacity - 150);
         expect(reservoire.getUnits(300).currentFillingLevel())
             .toBe(mdix.waterReservoireConfigSpec.capacity - 150 - 300);
+    });
+
+    it('should emit provideWater with the available water amount when requestWater is emitted', function() {
+        reservoire.refill();
+        mediator.subscribe('provideWater', callbackSpy);
+        mediator.publish('requestWater');
+
+        expect(callbackSpy.calls.mostRecent().args[0].units).toBe(reservoire.currentFillingLevel());
+    });
+
+    it('should emit provideWater with the provider object when requestWater is emitted', function() {
+        reservoire.refill();
+        mediator.subscribe('provideWater', callbackSpy);
+        mediator.publish('requestWater');
+
+        expect(callbackSpy.calls.mostRecent().args[0].provider instanceof mdix.waterReservoire).toBeTruthy();
     });
 
     describe('should be chainable:', function() {
